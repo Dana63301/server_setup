@@ -1,0 +1,10 @@
+if [[ -f /usr/bin/vim ]]; then
+    alias vi='/usr/bin/vim'
+fi
+
+
+if [[ "$(uname -s)" == "Linux" ]]; then
+    alias ls='ls --color'
+fi
+
+alias ll='ls -al | sort'

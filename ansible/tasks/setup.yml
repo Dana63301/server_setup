@@ -1,0 +1,19 @@
+---
+- hosts: all
+  vars:
+    packages: [vim,tmux,tree,epel-release]
+  become: yes
+  tasks:
+  - name: Add Dana
+    user:
+      name: dana
+      comment: Dana
+      group: wheel
+      # Created with: 
+      # openssl passwd -salt <salt here> -1 <password here>
+      password: $1$hskjdfh$j7D.av2Q7/j7E86eP.NaZ.
+  - name: Install Packages (Red Hat Variants)
+    yum:
+      name: '{{ packages }}'
+      state: latest
+    when: ansible_os_family == "RedHat"

@@ -1,5 +1,11 @@
 ---
 - hosts: all
+  # Only run on RedHat-based distributions
+  # Personal home lab will only be running RHEl / CentOS
+  # This ensures that I don't run commands against other
+  # devices accedentally
+
+
   vars:
     packages: [vim,tmux,tree,epel-release]
   become: yes
@@ -12,8 +18,15 @@
       # Created with: 
       # openssl passwd -salt <salt here> -1 <password here>
       password: $1$hskjdfh$j7D.av2Q7/j7E86eP.NaZ.
+    when: ansible_os_family == "RedHat"
   - name: Install Packages (Red Hat Variants)
     yum:
       name: '{{ packages }}'
+      state: latest
+    when: ansible_os_family == "RedHat"
+
+  - name: Update System (All Packages)
+    yum:
+      name: '*'
       state: latest
     when: ansible_os_family == "RedHat"

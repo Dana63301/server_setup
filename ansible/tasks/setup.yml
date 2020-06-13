@@ -1,11 +1,5 @@
 ---
 - hosts: all
-  # Only run on RedHat-based distributions
-  # Personal home lab will only be running RHEl / CentOS
-  # This ensures that I don't run commands against other
-  # devices accedentally
-
-
   vars:
     packages: [vim,tmux,tree,epel-release]
   become: yes
